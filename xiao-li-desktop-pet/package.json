@@ -1,0 +1,12 @@
+{
+  "name": "xiao-li-desktop-pet",
+  "version": "1.0.0",
+  "description": "A roaming desktop pet for Xiao Li.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^38.4.0"
+  }
+}

@@ -1,0 +1,235 @@
+{
+  "pet_id": "xiao-li",
+  "display_name": "Xiao Li",
+  "description": "A gentle memorial tabby cat desktop pet named \u5c0f\u72f8, based on childhood photos.",
+  "created_at": "2026-05-12T03:57:32.947559+00:00",
+  "atlas": {
+    "columns": 8,
+    "rows": 9,
+    "cell_width": 192,
+    "cell_height": 208,
+    "width": 1536,
+    "height": 1872
+  },
+  "rows": [
+    {
+      "state": "idle",
+      "row": 0,
+      "frames": 6,
+      "purpose": "neutral breathing/blinking loop"
+    },
+    {
+      "state": "running-right",
+      "row": 1,
+      "frames": 8,
+      "purpose": "rightward locomotion loop"
+    },
+    {
+      "state": "running-left",
+      "row": 2,
+      "frames": 8,
+      "purpose": "leftward locomotion loop"
+    },
+    {
+      "state": "waving",
+      "row": 3,
+      "frames": 4,
+      "purpose": "greeting gesture with raised wave and return"
+    },
+    {
+      "state": "jumping",
+      "row": 4,
+      "frames": 5,
+      "purpose": "anticipation, lift, peak, descent, settle"
+    },
+    {
+      "state": "failed",
+      "row": 5,
+      "frames": 8,
+      "purpose": "sad, failed, or deflated reaction"
+    },
+    {
+      "state": "waiting",
+      "row": 6,
+      "frames": 6,
+      "purpose": "patient waiting loop with small motion"
+    },
+    {
+      "state": "running",
+      "row": 7,
+      "frames": 6,
+      "purpose": "active working/in-progress loop"
+    },
+    {
+      "state": "review",
+      "row": 8,
+      "frames": 6,
+      "purpose": "focused inspecting or review loop"
+    }
+  ],
+  "layout_guides": [
+    {
+      "state": "idle",
+      "path": "references\\layout-guides\\idle.png",
+      "width": 1152,
+      "height": 208,
+      "frames": 6,
+      "cell_width": 192,
+      "cell_height": 208,
+      "safe_margin_x": 18,
+      "safe_margin_y": 16,
+      "usage": "layout guide input only; do not copy visible guide lines into generated sprite strips"
+    },
+    {
+      "state": "running-right",
+      "path": "references\\layout-guides\\running-right.png",
+      "width": 1536,
+      "height": 208,
+      "frames": 8,
+      "cell_width": 192,
+      "cell_height": 208,
+      "safe_margin_x": 18,
+      "safe_margin_y": 16,
+      "usage": "layout guide input only; do not copy visible guide lines into generated sprite strips"
+    },
+    {
+      "state": "running-left",
+      "path": "references\\layout-guides\\running-left.png",
+      "width": 1536,
+      "height": 208,
+      "frames": 8,
+      "cell_width": 192,
+      "cell_height": 208,
+      "safe_margin_x": 18,
+      "safe_margin_y": 16,
+      "usage": "layout guide input only; do not copy visible guide lines into generated sprite strips"
+    },
+    {
+      "state": "waving",
+      "path": "references\\layout-guides\\waving.png",
+      "width": 768,
+      "height": 208,
+      "frames": 4,
+      "cell_width": 192,
+      "cell_height": 208,
+      "safe_margin_x": 18,
+      "safe_margin_y": 16,
+      "usage": "layout guide input only; do not copy visible guide lines into generated sprite strips"
+    },
+    {
+      "state": "jumping",
+      "path": "references\\layout-guides\\jumping.png",
+      "width": 960,
+      "height": 208,
+      "frames": 5,
+      "cell_width": 192,
+      "cell_height": 208,
+      "safe_margin_x": 18,
+      "safe_margin_y": 16,
+      "usage": "layout guide input only; do not copy visible guide lines into generated sprite strips"
+    },
+    {
+      "state": "failed",
+      "path": "references\\layout-guides\\failed.png",
+      "width": 1536,
+      "height": 208,
+      "frames": 8,
+      "cell_width": 192,
+      "cell_height": 208,
+      "safe_margin_x": 18,
+      "safe_margin_y": 16,
+      "usage": "layout guide input only; do not copy visible guide lines into generated sprite strips"
+    },
+    {
+      "state": "waiting",
+      "path": "references\\layout-guides\\waiting.png",
+      "width": 1152,
+      "height": 208,
+      "frames": 6,
+      "cell_width": 192,
+      "cell_height": 208,
+      "safe_margin_x": 18,
+      "safe_margin_y": 16,
+      "usage": "layout guide input only; do not copy visible guide lines into generated sprite strips"
+    },
+    {
+      "state": "running",
+      "path": "references\\layout-guides\\running.png",
+      "width": 1152,
+      "height": 208,
+      "frames": 6,
+      "cell_width": 192,
+      "cell_height": 208,
+      "safe_margin_x": 18,
+      "safe_margin_y": 16,
+      "usage": "layout guide input only; do not copy visible guide lines into generated sprite strips"
+    },
+    {
+      "state": "review",
+      "path": "references\\layout-guides\\review.png",
+      "width": 1152,
+      "height": 208,
+      "frames": 6,
+      "cell_width": 192,
+      "cell_height": 208,
+      "safe_margin_x": 18,
+      "safe_margin_y": 16,
+      "usage": "layout guide input only; do not copy visible guide lines into generated sprite strips"
+    }
+  ],
+  "references": [
+    {
+      "path": "C:\\Users\\Administrator\\Desktop\\\u7b14\u8bb0\u56fe\\\u8fd0\u8425\\hatch-pet-xiaoli\\references\\reference-01.jpg",
+      "width": 640,
+      "height": 1137,
+      "mode": "RGB",
+      "format": "JPEG",
+      "source_path": "C:\\Users\\Administrator\\AppData\\Roaming\\LarkShell\\sdk_storage\\01d62026e34166aaa0c7bd0250619007\\resources\\images\\img_v3_0211k_3de27ece-126e-4e4f-91f3-8114042af63g.jpg",
+      "copied_path": "C:\\Users\\Administrator\\Desktop\\\u7b14\u8bb0\u56fe\\\u8fd0\u8425\\hatch-pet-xiaoli\\references\\reference-01.jpg"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\Desktop\\\u7b14\u8bb0\u56fe\\\u8fd0\u8425\\hatch-pet-xiaoli\\references\\reference-02.jpg",
+      "width": 863,
+      "height": 640,
+      "mode": "RGB",
+      "format": "JPEG",
+      "source_path": "C:\\Users\\Administrator\\AppData\\Roaming\\LarkShell\\sdk_storage\\01d62026e34166aaa0c7bd0250619007\\resources\\images\\img_v3_0211k_f7059f64-b756-40f6-a885-99f225b7377g.jpg",
+      "copied_path": "C:\\Users\\Administrator\\Desktop\\\u7b14\u8bb0\u56fe\\\u8fd0\u8425\\hatch-pet-xiaoli\\references\\reference-02.jpg"
+    },
+    {
+      "path": "C:\\Users\\Administrator\\Desktop\\\u7b14\u8bb0\u56fe\\\u8fd0\u8425\\hatch-pet-xiaoli\\references\\reference-03.jpg",
+      "width": 863,
+      "height": 640,
+      "mode": "RGB",
+      "format": "JPEG",
+      "source_path": "C:\\Users\\Administrator\\AppData\\Roaming\\LarkShell\\sdk_storage\\01d62026e34166aaa0c7bd0250619007\\resources\\images\\img_v3_0211k_e3d7c2ae-4fba-4003-8a2e-c0ef60cb80fg.jpg",
+      "copied_path": "C:\\Users\\Administrator\\Desktop\\\u7b14\u8bb0\u56fe\\\u8fd0\u8425\\hatch-pet-xiaoli\\references\\reference-03.jpg"
+    }
+  ],
+  "chroma_key": {
+    "hex": "#FF00FF",
+    "rgb": [
+      255,
+      0,
+      255
+    ],
+    "name": "magenta",
+    "selection": "auto",
+    "score": 198.78
+  },
+  "pet_notes": "A small elderly brown-gray tabby cat nicknamed \u5c0f\u72f8, round soft face, dark forehead stripes, pale muzzle, white whiskers, gentle sleepy eyes, short compact body, warm nostalgic personality.",
+  "style_notes": "Codex digital pet style: small pixel-art-adjacent chibi mascot, compact readable silhouette, thick dark outline, flat cel shading, limited brown gray cream palette, no realistic fur detail, no scenery.",
+  "house_style": "Codex digital pet sprite style: pixel-art-adjacent low-resolution mascot sprite, compact chibi proportions, chunky whole-body silhouette, thick dark 1-2 px outline, visible stepped/pixel edges, limited palette, flat cel shading with at most one small highlight and one shadow step, simple readable face, tiny limbs, and no detail that disappears at 192x208. Avoid polished illustration, painterly rendering, anime key art, 3D render, vector app-icon polish, glossy lighting, soft gradients, realistic fur or material texture, anti-aliased high-detail edges, and complex tiny accessories.",
+  "primary_generation_skill": "$imagegen",
+  "canonical_identity_reference": {
+    "path": "references\\canonical-base.png",
+    "source_job": "base",
+    "sha256": "6d1cb7f41b67a3c943f8fff98372aeb8c11bae3b36e0aa072a6889732aafce2a",
+    "metadata": {
+      "width": 1201,
+      "height": 1310,
+      "mode": "RGB",
+      "format": "PNG"
+    }
+  }
+}

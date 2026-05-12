@@ -1,0 +1,192 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: transparent;
+  user-select: none;
+}
+
+#stage {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: end center;
+  padding-bottom: 8px;
+  background: transparent;
+}
+
+#quitButton {
+  position: absolute;
+  right: 22px;
+  top: 18px;
+  display: none;
+  min-width: 56px;
+  height: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.82);
+  border-radius: 8px;
+  background: rgba(32, 32, 32, 0.78);
+  color: #fff;
+  font: 13px/1 system-ui, sans-serif;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.22);
+  cursor: pointer;
+}
+
+#quitButton.visible {
+  display: block;
+}
+
+#sleepBubble {
+  position: absolute;
+  right: 44px;
+  top: 56px;
+  display: none;
+  color: rgba(255, 255, 255, 0.92);
+  font: 600 20px/1.1 Georgia, serif;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.34);
+  animation: sleepFloat 4.8s ease-in-out infinite;
+}
+
+#sleepBubble.visible {
+  display: block;
+}
+
+#thoughtBubble {
+  position: absolute;
+  left: 28px;
+  top: 16px;
+  display: none;
+  max-width: 138px;
+  min-height: 28px;
+  box-sizing: border-box;
+  padding: 7px 10px;
+  border: 2px solid rgba(57, 44, 34, 0.92);
+  border-radius: 18px;
+  background: rgba(255, 252, 239, 0.94);
+  color: #3a2b21;
+  font: 600 13px/1.25 "Microsoft YaHei", system-ui, sans-serif;
+  text-align: center;
+  filter: drop-shadow(0 5px 7px rgba(0, 0, 0, 0.18));
+  animation: thoughtDrift 7.5s ease-in-out infinite;
+}
+
+#thoughtBubble::before,
+#thoughtBubble::after {
+  position: absolute;
+  content: "";
+  border: 2px solid rgba(57, 44, 34, 0.9);
+  border-radius: 50%;
+  background: rgba(255, 252, 239, 0.94);
+}
+
+#thoughtBubble::before {
+  right: 22px;
+  bottom: -11px;
+  width: 10px;
+  height: 10px;
+}
+
+#thoughtBubble::after {
+  right: 11px;
+  bottom: -23px;
+  width: 6px;
+  height: 6px;
+}
+
+#thoughtBubble.visible {
+  display: block;
+}
+
+#foodBowl {
+  position: absolute;
+  left: 48px;
+  bottom: 18px;
+  display: none;
+  width: 38px;
+  height: 16px;
+  border-radius: 7px 7px 18px 18px;
+  background: linear-gradient(#e8f3f2 0 35%, #8aa3a0 36% 100%);
+  box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.12), 0 5px 10px rgba(0, 0, 0, 0.18);
+}
+
+#foodBowl span {
+  position: absolute;
+  left: 7px;
+  top: -5px;
+  width: 24px;
+  height: 8px;
+  border-radius: 999px;
+  background: #7c4b31;
+}
+
+#foodBowl.visible {
+  display: block;
+}
+
+#pet {
+  width: 192px;
+  height: 208px;
+  background-image: url("./assets/spritesheet.webp");
+  background-size: 1536px 1872px;
+  background-position: 0 0;
+  image-rendering: auto;
+  transform-origin: 50% 100%;
+  scale: 0.7;
+  filter: drop-shadow(0 8px 10px rgba(0, 0, 0, 0.25));
+  cursor: grab;
+}
+
+#pet.dragging {
+  cursor: grabbing;
+}
+
+#pet.eating {
+  animation: slowNibble 2.8s ease-in-out infinite;
+}
+
+#pet.sleeping {
+  animation: sleepBreath 5.4s ease-in-out infinite;
+}
+
+@keyframes slowNibble {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(3px) rotate(-1.5deg);
+  }
+}
+
+@keyframes sleepBreath {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.018);
+  }
+}
+
+@keyframes sleepFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.55;
+  }
+  50% {
+    transform: translateY(-12px);
+    opacity: 1;
+  }
+}
+
+@keyframes thoughtDrift {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}

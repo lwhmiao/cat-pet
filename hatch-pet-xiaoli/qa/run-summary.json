@@ -1,0 +1,10 @@
+{
+  "ok": true,
+  "run_dir": "C:\\Users\\Administrator\\Desktop\\\u7b14\u8bb0\u56fe\\\u8fd0\u8425\\hatch-pet-xiaoli",
+  "spritesheet": "C:\\Users\\Administrator\\Desktop\\\u7b14\u8bb0\u56fe\\\u8fd0\u8425\\hatch-pet-xiaoli\\final\\spritesheet.webp",
+  "validation": "C:\\Users\\Administrator\\Desktop\\\u7b14\u8bb0\u56fe\\\u8fd0\u8425\\hatch-pet-xiaoli\\final\\validation.json",
+  "contact_sheet": "C:\\Users\\Administrator\\Desktop\\\u7b14\u8bb0\u56fe\\\u8fd0\u8425\\hatch-pet-xiaoli\\qa\\contact-sheet.png",
+  "review": "C:\\Users\\Administrator\\Desktop\\\u7b14\u8bb0\u56fe\\\u8fd0\u8425\\hatch-pet-xiaoli\\qa\\review.json",
+  "videos": "C:\\Users\\Administrator\\Desktop\\\u7b14\u8bb0\u56fe\\\u8fd0\u8425\\hatch-pet-xiaoli\\qa\\videos",
+  "package": "C:\\Users\\Administrator\\.codex\\pets\\xiao-li"
+}
