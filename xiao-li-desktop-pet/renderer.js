@@ -50,6 +50,8 @@ let interactionToken = 0;
 let dragMoved = false;
 let pointerStart = { x: 0, y: 0 };
 let behaviorTurn = 0;
+let nudgeState = "";
+let nudgeCount = 0;
 
 const thoughts = [
   "饭呢",
@@ -174,6 +176,33 @@ const thoughts = [
 const recentThoughts = [];
 const RECENT_THOUGHT_LIMIT = 10;
 
+const nudgeThoughts = {
+  sleeping: [
+    "别吵……睡觉呢",
+    "叫我吗？好困……",
+    "梦还没存档",
+    "再等五分钟",
+    "眼睛还没开机",
+    "被窝信号很好",
+    "我在梦里巡逻",
+    "现在不接电话",
+    "呼噜还没结束",
+    "困意占上风"
+  ],
+  eating: [
+    "等我吃完",
+    "饭比你重要一点",
+    "嘴里有事",
+    "先不要打扰饭",
+    "这口很关键",
+    "碗正在汇报",
+    "吃饭要专心",
+    "马上，嚼完再说",
+    "别抢我的碗",
+    "我听见了，先吃"
+  ]
+};
+
 function setFrame(nextState, nextFrame) {
   state = nextState;
   const animation = animations[state];
@@ -224,9 +253,21 @@ function chooseThought() {
   return thought;
 }
 
-function showThought() {
-  thoughtBubble.textContent = chooseThought();
+function chooseNudgeThought(activity, count) {
+  const lines = nudgeThoughts[activity] || thoughts;
+  return lines[(count - 1) % lines.length];
+}
+
+function showThought(text = chooseThought(), autoHideMs = 0) {
+  clearTimeout(thoughtTimer);
+  thoughtBubble.textContent = text;
   thoughtBubble.classList.add("visible");
+
+  if (autoHideMs > 0) {
+    thoughtTimer = setTimeout(() => {
+      thoughtBubble.classList.remove("visible");
+    }, autoHideMs);
+  }
 }
 
 function clearProps() {
@@ -237,9 +278,21 @@ function clearProps() {
   foodBowl.classList.remove("visible");
 }
 
+function resetNudgeCount() {
+  nudgeState = "";
+  nudgeCount = 0;
+}
+
 function cancelCurrentBehavior() {
   interactionToken += 1;
   behaviorBusy = false;
+  resetNudgeCount();
+}
+
+function currentInterruptibleActivity() {
+  if (pet.classList.contains("sleeping")) return "sleeping";
+  if (pet.classList.contains("eating")) return "eating";
+  return "";
 }
 
 function chooseQuietMood() {
@@ -251,6 +304,7 @@ async function slowWalk() {
   if (dragging) return;
 
   const token = interactionToken;
+  resetNudgeCount();
   clearProps();
   direction = Math.random() > 0.5 ? 1 : -1;
   const steps = 18 + Math.floor(Math.random() * 14);
@@ -270,6 +324,7 @@ async function thinkForAWhile(duration = 52000 + Math.random() * 52000) {
   if (dragging) return;
 
   const token = interactionToken;
+  resetNudgeCount();
   clearProps();
   play(Math.random() > 0.5 ? "waiting" : "review");
   showThought();
@@ -289,6 +344,7 @@ async function sleepForAWhile() {
   if (dragging) return;
 
   const token = interactionToken;
+  resetNudgeCount();
   clearProps();
   pet.classList.add("sleeping");
   sleepBubble.classList.add("visible");
@@ -303,6 +359,7 @@ async function eatForAWhile() {
   if (dragging) return;
 
   const token = interactionToken;
+  resetNudgeCount();
   clearProps();
   pet.classList.add("eating");
   foodBowl.classList.add("visible");
@@ -315,6 +372,7 @@ async function eatForAWhile() {
 
 async function quietForAWhile() {
   const token = interactionToken;
+  resetNudgeCount();
   clearProps();
   play(chooseQuietMood());
   await rest(42000 + Math.random() * 42000);
@@ -378,6 +436,17 @@ pet.addEventListener("dblclick", async () => {
   clearTimeout(clickTimer);
   if (dragging || dragMoved) return;
 
+  const activity = currentInterruptibleActivity();
+  if (activity) {
+    nudgeCount = nudgeState === activity ? nudgeCount + 1 : 1;
+    nudgeState = activity;
+
+    if (nudgeCount < 3) {
+      showThought(chooseNudgeThought(activity, nudgeCount), 5200);
+      return;
+    }
+  }
+
   cancelCurrentBehavior();
   behaviorBusy = true;
   await thinkForAWhile(36000);
@@ -388,7 +457,6 @@ pet.addEventListener("pointerdown", (event) => {
   dragging = true;
   dragMoved = false;
   pointerStart = { x: event.screenX, y: event.screenY };
-  clearProps();
   pet.classList.add("dragging");
   pet.setPointerCapture(event.pointerId);
   dragOffset = {
@@ -400,6 +468,10 @@ pet.addEventListener("pointerdown", (event) => {
 pet.addEventListener("pointermove", (event) => {
   if (!dragging) return;
   if (Math.abs(event.screenX - pointerStart.x) > 3 || Math.abs(event.screenY - pointerStart.y) > 3) {
+    if (!dragMoved) {
+      resetNudgeCount();
+      clearProps();
+    }
     dragMoved = true;
   }
   window.petWindow.dragTo(event.screenX - dragOffset.x, event.screenY - dragOffset.y);
