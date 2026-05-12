@@ -39,11 +39,11 @@ body {
 
 #sleepBubble {
   position: absolute;
-  right: 44px;
-  top: 56px;
+  right: 78px;
+  top: 86px;
   display: none;
   color: rgba(255, 255, 255, 0.92);
-  font: 600 20px/1.1 Georgia, serif;
+  font: 600 18px/1.1 Georgia, serif;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.34);
   animation: sleepFloat 4.8s ease-in-out infinite;
 }
@@ -149,6 +149,10 @@ body {
   animation: sleepBreath 5.4s ease-in-out infinite;
 }
 
+#pet.walking {
+  animation: walkSway 1.8s ease-in-out infinite;
+}
+
 @keyframes slowNibble {
   0%,
   100% {
@@ -178,6 +182,16 @@ body {
   50% {
     transform: translateY(-12px);
     opacity: 1;
+  }
+}
+
+@keyframes walkSway {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-2px) rotate(-1deg);
   }
 }
 

@@ -272,7 +272,7 @@ function showThought(text = chooseThought(), autoHideMs = 0) {
 
 function clearProps() {
   clearTimeout(thoughtTimer);
-  pet.classList.remove("eating", "sleeping");
+  pet.classList.remove("eating", "sleeping", "walking");
   thoughtBubble.classList.remove("visible");
   sleepBubble.classList.remove("visible");
   foodBowl.classList.remove("visible");
@@ -306,17 +306,19 @@ async function slowWalk() {
   const token = interactionToken;
   resetNudgeCount();
   clearProps();
-  direction = Math.random() > 0.5 ? 1 : -1;
-  const steps = 18 + Math.floor(Math.random() * 14);
-  const stepX = 3.5 + Math.random() * 2.5;
+  direction *= -1;
+  const steps = 24 + Math.floor(Math.random() * 12);
+  const stepX = 6 + Math.random() * 2.5;
+  pet.classList.add("walking");
   play(direction > 0 ? "slow-walk-right" : "slow-walk-left");
 
   for (let i = 0; i < steps; i += 1) {
     if (dragging || token !== interactionToken) return;
     window.petWindow.moveBy(direction * stepX, Math.sin(i / 5) * 0.35);
-    await rest(950);
+    await rest(820);
   }
 
+  pet.classList.remove("walking");
   play("idle");
 }
 
@@ -362,7 +364,6 @@ async function eatForAWhile() {
   resetNudgeCount();
   clearProps();
   pet.classList.add("eating");
-  foodBowl.classList.add("visible");
   play("eating");
   await rest(48000 + Math.random() * 36000);
   if (token !== interactionToken) return;
@@ -382,9 +383,9 @@ async function quietForAWhile() {
 async function runNaturalBehavior(roll) {
   behaviorTurn += 1;
 
-  if (behaviorTurn === 1 || behaviorTurn % 5 === 0) {
+  if (behaviorTurn === 1 || behaviorTurn % 3 === 0) {
     await slowWalk();
-  } else if (behaviorTurn === 3 || behaviorTurn % 7 === 0) {
+  } else if (behaviorTurn === 2 || behaviorTurn % 6 === 0) {
     await sleepForAWhile();
   } else if (roll < 0.26) {
     await slowWalk();
@@ -410,10 +411,10 @@ async function behaviorLoop() {
     }
   }
 
-  setTimeout(behaviorLoop, 26000 + Math.random() * 28000);
+  setTimeout(behaviorLoop, 18000 + Math.random() * 22000);
 }
 
-setTimeout(behaviorLoop, 5000);
+setTimeout(behaviorLoop, 2500);
 
 pet.addEventListener("pointerenter", () => {
   if (!dragging && !behaviorBusy) {
