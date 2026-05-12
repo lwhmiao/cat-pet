@@ -49,6 +49,7 @@ let clickTimer;
 let interactionToken = 0;
 let dragMoved = false;
 let pointerStart = { x: 0, y: 0 };
+let behaviorTurn = 0;
 
 const thoughts = [
   "饭呢",
@@ -133,14 +134,14 @@ async function slowWalk() {
   const token = interactionToken;
   clearProps();
   direction = Math.random() > 0.5 ? 1 : -1;
-  const steps = 7 + Math.floor(Math.random() * 9);
-  const stepX = 4 + Math.random() * 4;
+  const steps = 18 + Math.floor(Math.random() * 14);
+  const stepX = 3.5 + Math.random() * 2.5;
   play(direction > 0 ? "slow-walk-right" : "slow-walk-left");
 
   for (let i = 0; i < steps; i += 1) {
     if (dragging || token !== interactionToken) return;
     window.petWindow.moveBy(direction * stepX, Math.sin(i / 5) * 0.35);
-    await rest(1150);
+    await rest(950);
   }
 
   play("idle");
@@ -170,8 +171,10 @@ async function sleepForAWhile() {
 
   const token = interactionToken;
   clearProps();
+  pet.classList.add("sleeping");
+  sleepBubble.classList.add("visible");
   play("sleeping");
-  await rest(90000 + Math.random() * 90000);
+  await rest(65000 + Math.random() * 55000);
   if (token !== interactionToken) return;
   clearProps();
   if (!dragging) play("idle");
@@ -182,8 +185,10 @@ async function eatForAWhile() {
 
   const token = interactionToken;
   clearProps();
+  pet.classList.add("eating");
+  foodBowl.classList.add("visible");
   play("eating");
-  await rest(65000 + Math.random() * 45000);
+  await rest(48000 + Math.random() * 36000);
   if (token !== interactionToken) return;
   clearProps();
   if (!dragging) play("idle");
@@ -193,8 +198,28 @@ async function quietForAWhile() {
   const token = interactionToken;
   clearProps();
   play(chooseQuietMood());
-  await rest(70000 + Math.random() * 70000);
+  await rest(42000 + Math.random() * 42000);
   if (token !== interactionToken) return;
+}
+
+async function runNaturalBehavior(roll) {
+  behaviorTurn += 1;
+
+  if (behaviorTurn === 1 || behaviorTurn % 5 === 0) {
+    await slowWalk();
+  } else if (behaviorTurn === 3 || behaviorTurn % 7 === 0) {
+    await sleepForAWhile();
+  } else if (roll < 0.26) {
+    await slowWalk();
+  } else if (roll < 0.42) {
+    await thinkForAWhile(42000 + Math.random() * 42000);
+  } else if (roll < 0.58) {
+    await eatForAWhile();
+  } else if (roll < 0.82) {
+    await sleepForAWhile();
+  } else {
+    await quietForAWhile();
+  }
 }
 
 async function behaviorLoop() {
@@ -202,26 +227,16 @@ async function behaviorLoop() {
     behaviorBusy = true;
     const token = interactionToken;
     const roll = Math.random();
-    if (roll < 0.14) {
-      await slowWalk();
-    } else if (roll < 0.28) {
-      await thinkForAWhile();
-    } else if (roll < 0.42) {
-      await eatForAWhile();
-    } else if (roll < 0.68) {
-      await sleepForAWhile();
-    } else {
-      await quietForAWhile();
-    }
+    await runNaturalBehavior(roll);
     if (token === interactionToken) {
       behaviorBusy = false;
     }
   }
 
-  setTimeout(behaviorLoop, 65000 + Math.random() * 55000);
+  setTimeout(behaviorLoop, 26000 + Math.random() * 28000);
 }
 
-behaviorLoop();
+setTimeout(behaviorLoop, 5000);
 
 pet.addEventListener("pointerenter", () => {
   if (!dragging && !behaviorBusy) {
